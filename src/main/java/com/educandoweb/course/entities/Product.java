@@ -9,8 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "tb_product")
@@ -28,7 +30,11 @@ public class Product implements Serializable {
 
 	
 	//usar o Set para garantir que não se repita, ou seja, não usar o List
-	@Transient
+	@ManyToMany
+	@JoinTable(name = "tb_product_category", 
+		joinColumns = @JoinColumn(name = "product_id"), //campo da tabela Product
+		inverseJoinColumns = @JoinColumn(name = "category_id")//chave estrangeira da outra entidade, inverso da Product (está nessa classe aqui) é Categoria (nome da outra tabela)
+	)
 	private Set<Category> categories = new HashSet<>();
 	
 	public Product() {		
