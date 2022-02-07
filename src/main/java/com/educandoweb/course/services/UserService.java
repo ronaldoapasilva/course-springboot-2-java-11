@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
+import com.educandoweb.course.services.exceptions.ResourceNotFoundException;
 
 // @Component //essa anotação permite registrar mapear com o autowired, spring já entende
 @Service //Service é mais semanticamente especifico, mas poderia usar o component acima, essa anotação permite registrar mapear com o autowired, spring já entende
@@ -25,7 +26,8 @@ public class UserService {
 
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id); //vai no banco de dados
-		return obj.get();		
+	//	return obj.get();		dá exceção 500 caso o objeto user não estiver presente
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public User insert(User obj) {
