@@ -2,6 +2,7 @@ package com.educandoweb.course.config;
 
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,6 +21,7 @@ import com.educandoweb.course.repositories.OrderItemRepository;
 import com.educandoweb.course.repositories.OrderRepository;
 import com.educandoweb.course.repositories.ProductRepository;
 import com.educandoweb.course.repositories.UserRepository;
+
 
 @Configuration
 @Profile("test") //esse nome test tem que ser igual ao do profile, arquivo application.properties, spring.profiles.active=test
@@ -44,6 +46,8 @@ public class TestConfig implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 		
+		
+		System.out.println();
 		Category cat1 = new Category(null, "Electronics");
 		Category cat2 = new Category(null, "Books");
 		Category cat3 = new Category(null, "Computers");
@@ -96,7 +100,9 @@ public class TestConfig implements CommandLineRunner{
 		o1.setPayment(pay1);
 		// e aí salva novamente o pedido
 		orderRepository.save(o1);
-	}
+		
+		
+			}
 	
 	
 }
